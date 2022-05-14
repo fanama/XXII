@@ -19,6 +19,6 @@ server.get("/", (req, res) => {
 });
 
 server.listen(PORT || 3000, () => {
-  console.log({ MODE });
-  console.log("Sql node is on 3000");
+  console.log({ MODE, PORT });
+  console.log("Sql node is on " + PORT || 3000);
 });
