@@ -1,8 +1,6 @@
 import jwt from "jsonwebtoken";
 
-import * as dotenv from "dotenv";
 import { User } from "../../domain/user";
-dotenv.config();
 
 export function authenticateToken(req: any, res: any, next: any) {
   const authHeader = req.headers["authorization"];
@@ -16,7 +14,6 @@ export function authenticateToken(req: any, res: any, next: any) {
       console.log(err);
       if (err) return res.sendStatus(403);
       req.user = user;
-      console.log({ user });
       next();
     }
   );
