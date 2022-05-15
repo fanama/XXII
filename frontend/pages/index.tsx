@@ -1,11 +1,15 @@
-import axios from "axios";
 import type { NextPage } from "next";
+import { useLogin } from "../components/Login/useLogin";
 import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
+  const { user, updateUser, logUser } = useLogin();
+
   return (
     <div className={styles.container}>
-      <button onClick={() => axios.get("/server/auth")}>test</button>
+      <input name="username" value={user.username} onChange={updateUser} />
+      <input name="password" value={user.password} onChange={updateUser} />
+      <button onClick={logUser}>log in</button>
     </div>
   );
 };

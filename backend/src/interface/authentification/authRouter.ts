@@ -18,6 +18,8 @@ auth.post("/login", async (req, res) => {
   }
 
   const accessToken = generateAccessToken({ username, isAdmin } as User);
-
-  res.json({ accessToken });
+  res
+    .cookie("accessToken", accessToken)
+    .cookie("test", "test")
+    .json({ accessToken });
 });

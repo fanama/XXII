@@ -1,7 +1,11 @@
 import express from "express";
 import { User } from "../../domain/user";
 import { getInfraUser } from "../../infra/user";
-import { getInfraVideos, uploadInfraVideo } from "../../infra/video";
+import {
+  getInfraVideo,
+  getInfraVideos,
+  uploadInfraVideo,
+} from "../../infra/video";
 
 export const videoRouter = express.Router();
 
@@ -18,8 +22,9 @@ videoRouter.get("/user/:id", async (req, res) => {
   res.send(await getInfraVideos(user));
 });
 
-videoRouter.get("/id/:id", (req, res) => {
-  res.send("get video id : " + req.params.id);
+videoRouter.get("/id/:id", async (req, res) => {
+  const id = parseInt(req.params.id);
+  res.send(await getInfraVideo(id));
 });
 
 videoRouter.post("/upload", async (req, res) => {
