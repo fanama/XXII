@@ -5,6 +5,7 @@ import { auth } from "./authentification/authRouter";
 import { videoRouter } from "./video/video";
 import { authenticateToken } from "./authentification/authentificateToken";
 
+export const expressStatic = express;
 export const server = express();
 
 server.use(express.urlencoded({ extended: false }));

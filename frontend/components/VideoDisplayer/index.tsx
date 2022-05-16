@@ -5,7 +5,7 @@ interface Props {
 }
 
 export function VideoDisplayer({ name }: Props) {
-  const videoRef = useRef<any>();
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     videoRef.current?.load();
