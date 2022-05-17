@@ -1,3 +1,4 @@
+import { UploadedFile } from "express-fileupload";
 import { User } from "../domain/user";
 import { Video } from "../domain/video";
 import { videoMock } from "./mock/video";
@@ -17,7 +18,18 @@ export async function getInfraVideo(id: number): Promise<Video> {
   return getRepoVideo(id);
 }
 
-export async function uploadInfraVideo(): Promise<boolean> {
-  console.log(process.mainModule?.path);
-  return true;
+export async function uploadInfraVideo(file: UploadedFile): Promise<boolean> {
+  const uploadPath = process.mainModule?.path + "/videos/" + file.name;
+  if (process.env.MODE == "mock") {
+    console.log({ uploadPath });
+    return true;
+  }
+  try {
+    file.mv(uploadPath, (err) => {
+      console.log(err);
+    });
+    return true;
+  } catch (err) {
+    return false;
+  }
 }

@@ -11,6 +11,7 @@ export default function middleware(req: NextApiRequest) {
   response.headers.set("x-modified-edge", "true");
   // response.headers.set("authorization", `Bearer ${accessToken}`);
   // console.log(req.headers.authorization);
+  console.log(req.url);
 
   // Return response
   return response;

@@ -1,7 +1,7 @@
 import { User } from "../domain/user";
 import { Video } from "../domain/video";
 import { videoMock } from "./mock/video";
-import { getRepoVideo, getRepoVideos } from "./repo/video";
+import { getRepoVideo, getRepoVideos, uploadRepoVideo } from "./repo/video";
 
 export async function getInfraVideos(user?: User): Promise<Video[]> {
   if (process.env.MODE == "mock") {
@@ -17,7 +17,11 @@ export async function getInfraVideo(id: number): Promise<Video> {
   return getRepoVideo(id);
 }
 
-export async function uploadInfraVideo(): Promise<boolean> {
-  console.log(process.mainModule?.path);
-  return true;
+export async function uploadInfraVideo(formData: FormData): Promise<boolean> {
+  if (process.env.MODE == "mock") {
+    console.log({ formData });
+    return true;
+  }
+
+  return await uploadRepoVideo(formData);
 }

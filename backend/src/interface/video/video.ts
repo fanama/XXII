@@ -1,4 +1,5 @@
 import express from "express";
+import { UploadedFile } from "express-fileupload";
 import { User } from "../../domain/user";
 import { getInfraUser } from "../../infra/user";
 import {
@@ -28,7 +29,10 @@ videoRouter.get("/id/:id", async (req, res) => {
 });
 
 videoRouter.post("/upload", async (req, res) => {
-  const { video } = req.body;
-
-  res.send(await uploadInfraVideo());
+  if (!req.files || Object.keys(req.files).length === 0) {
+    res.send(false);
+    return;
+  }
+  const sampleFile: UploadedFile | any = req.files.video;
+  res.send(await uploadInfraVideo(sampleFile));
 });
