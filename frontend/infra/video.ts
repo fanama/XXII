@@ -6,7 +6,10 @@ import { getRepoVideo, getRepoVideos, uploadRepoVideo } from "./repo/video";
 export async function getInfraVideos(user?: User): Promise<Video[]> {
   if (process.env.MODE == "mock") {
     if (user?.isAdmin) return videoMock;
-    return videoMock.filter((video) => video.uploader.id == user?.id);
+    return videoMock.filter(
+      (video) =>
+        video.uploader.id == user?.id || video.uploader._id == user?._id
+    );
   }
   return await getRepoVideos(user);
 }

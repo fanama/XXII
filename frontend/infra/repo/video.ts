@@ -4,7 +4,7 @@ import { Video } from "../../domain/video";
 
 export async function getRepoVideos(user?: User): Promise<Video[]> {
   try {
-    const res = await axios.get(`/server/videos/user/${user?.id}`);
+    const res = await axios.get(`/server/videos/user/${user?._id}`);
     return res.data;
   } catch (e) {}
   return [];
@@ -15,7 +15,10 @@ export async function getRepoVideo(id?: number): Promise<Video> {
 
 export async function uploadRepoVideo(formData: FormData): Promise<boolean> {
   try {
-    await axios.post("/server/videos/upload", formData);
+    await axios.post(
+      "/server/videos/upload?id=62889c358b163d47f4c9db88",
+      formData
+    );
     return true;
   } catch (err) {
     return false;

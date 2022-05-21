@@ -19,20 +19,29 @@ videoRouter.get("/", async (req, res) => {
 });
 videoRouter.get("/user/:id", async (req, res) => {
   const { id } = req.params;
-  const user = await getInfraUser(parseInt(id));
+  const user = await getInfraUser(id);
   res.send(await getInfraVideos(user));
 });
 
 videoRouter.get("/id/:id", async (req, res) => {
-  const id = parseInt(req.params.id);
+  const id = req.params.id;
   res.send(await getInfraVideo(id));
 });
 
 videoRouter.post("/upload", async (req, res) => {
+  const { id } = req.query;
+
+  const user = await getInfraUser(`${id}`);
+  console.log({ user });
   if (!req.files || Object.keys(req.files).length === 0) {
-    res.send(false);
+    res.status(500).send(false);
     return;
   }
+
+  if (!user) {
+    return res.status(500).send("error");
+  }
+
   const sampleFile: UploadedFile | any = req.files.video;
-  res.send(await uploadInfraVideo(sampleFile));
+  res.send(await uploadInfraVideo(sampleFile, user));
 });

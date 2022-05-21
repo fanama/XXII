@@ -2,7 +2,8 @@ import { UploadedFile } from "express-fileupload";
 import { User } from "../domain/user";
 import { Video } from "../domain/video";
 import { videoMock } from "./mock/video";
-import { getRepoVideo, getRepoVideos } from "./repo/video";
+import { getRepoVideo, getRepoVideos, uploadRepoVideo } from "./repo/video";
+import { getInfraUser } from "./user";
 
 export async function getInfraVideos(user?: User): Promise<Video[]> {
   if (process.env.MODE == "mock") {
@@ -11,25 +12,22 @@ export async function getInfraVideos(user?: User): Promise<Video[]> {
   }
   return await getRepoVideos(user);
 }
-export async function getInfraVideo(id: number): Promise<Video> {
+export async function getInfraVideo(id: string): Promise<Video> {
   if (process.env.MODE == "mock") {
-    return videoMock.filter((video) => video.id == id)[0];
+    return videoMock.filter((video) => video._id == id)[0];
   }
+  const user = await getInfraUser(id);
   return getRepoVideo(id);
 }
 
-export async function uploadInfraVideo(file: UploadedFile): Promise<boolean> {
+export async function uploadInfraVideo(
+  file: UploadedFile,
+  user: User
+): Promise<boolean> {
   const uploadPath = process.mainModule?.path + "/videos/" + file.name;
   if (process.env.MODE == "mock") {
     console.log({ uploadPath });
     return true;
   }
-  try {
-    file.mv(uploadPath, (err) => {
-      console.log(err);
-    });
-    return true;
-  } catch (err) {
-    return false;
-  }
+  return await uploadRepoVideo(file, uploadPath, user);
 }

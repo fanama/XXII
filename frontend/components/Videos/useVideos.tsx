@@ -20,7 +20,9 @@ export function useVideos() {
     setDisplay(true);
   };
   const getVideos = async () => {
-    setVideos(await getInfraVideos({ id: 1 } as User));
+    setVideos(
+      await getInfraVideos({ id: 1, _id: "62889c358b163d47f4c9db88" } as User)
+    );
   };
 
   return { videos, currentVideo, setCurrentVideo, close, open, display };

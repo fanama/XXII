@@ -1,11 +1,12 @@
 import mongoose from "mongoose";
 
-mongoose.connect("mongodb://localhost:27017/videos");
+export const connect = async () => {
+  const defaultUri: string = "mongodb://localhost/videos";
 
-export const db = mongoose.connection;
+  mongoose.connect(process.env.MONGO_URI || defaultUri, {});
+};
 
-db.on("error", console.error.bind(console, "connection error:"));
-
-db.once("open", () => {
-  console.log("Connection Successful!");
-});
+export const close = async () => {
+  await mongoose.disconnect();
+  await mongoose.connection.close();
+};

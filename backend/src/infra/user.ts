@@ -1,6 +1,6 @@
 import { User } from "../domain/user";
 import { usersMock } from "./mock/user";
-import { userRepoGetter, userRepoLogin } from "./repo/user";
+import { userRepoCreate, userRepoGetter, userRepoLogin } from "./repo/user";
 
 export async function userInfraLogin(user: User): Promise<boolean> {
   if (process.env.MODE == "mock") {
@@ -11,10 +11,17 @@ export async function userInfraLogin(user: User): Promise<boolean> {
 
   return userRepoLogin(user);
 }
-
-export async function getInfraUser(id: number): Promise<User | undefined> {
+export async function userInfraCreate(user: User): Promise<boolean> {
   if (process.env.MODE == "mock") {
-    return usersMock.find((u) => u.id == id);
+    console.log("created !");
+    return true;
+  }
+
+  return userRepoCreate(user);
+}
+export async function getInfraUser(id: string): Promise<User | undefined> {
+  if (process.env.MODE == "mock") {
+    return usersMock.find((u) => u._id == id);
   }
 
   return userRepoGetter(id);
