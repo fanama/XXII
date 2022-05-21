@@ -13,12 +13,12 @@ export async function getRepoVideo(id?: number): Promise<Video> {
   return {} as Video;
 }
 
-export async function uploadRepoVideo(formData: FormData): Promise<boolean> {
+export async function uploadRepoVideo(
+  formData: FormData,
+  idUser: string
+): Promise<boolean> {
   try {
-    await axios.post(
-      "/server/videos/upload?id=62889c358b163d47f4c9db88",
-      formData
-    );
+    await axios.post("/server/videos/upload?id=" + idUser, formData);
     return true;
   } catch (err) {
     return false;

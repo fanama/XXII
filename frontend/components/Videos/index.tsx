@@ -3,7 +3,7 @@ import { VideoDisplayer } from "../VideoDisplayer";
 import { Window } from "../Window";
 import { box, button, vid } from "./tail";
 import { useVideos } from "./useVideos";
-
+import Image from "next/image";
 export function Videos() {
   const {
     videos,
@@ -22,6 +22,7 @@ export function Videos() {
       </Window>
       <div className="flex flex-row gap-10">
         <div className={box}>
+          <Image src="/logo.svg" width={70} height={70} />
           <button onClick={open} className={button}>
             upload new video
           </button>
@@ -32,7 +33,7 @@ export function Videos() {
                 setCurrentVideo(video.name);
               }}
             >
-              {video.name}
+              {video.name.split(".")[0]}
             </div>
           ))}
         </div>

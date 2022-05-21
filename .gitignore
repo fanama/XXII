@@ -1,4 +1,4 @@
 node_modules
 dist
-videos/*.mp4
+backend/videos/*.mp4
 .env

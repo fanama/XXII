@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import { useLogin } from "../components/Login/useLogin";
 import { useStyle } from "../hooks/useStyle";
-
+import Image from "next/image";
 import style from "../styles/login.module.scss";
 
 const Home: NextPage = () => {
@@ -10,6 +10,7 @@ const Home: NextPage = () => {
 
   return (
     <div className={formTail + style.form}>
+      <Image src="/logo.svg" width={70} height={70} />
       <label className={labelTail}> login </label>
       <input
         className={inputTail}

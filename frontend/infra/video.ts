@@ -21,11 +21,14 @@ export async function getInfraVideo(id: number): Promise<Video> {
   return getRepoVideo(id);
 }
 
-export async function uploadInfraVideo(formData: FormData): Promise<boolean> {
+export async function uploadInfraVideo(
+  formData: FormData,
+  idUser: string
+): Promise<boolean> {
   if (process.env.MODE == "mock") {
-    console.log({ formData });
+    console.log({ formData, idUser });
     return true;
   }
 
-  return await uploadRepoVideo(formData);
+  return await uploadRepoVideo(formData, idUser);
 }
