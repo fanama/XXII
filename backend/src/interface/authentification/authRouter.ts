@@ -12,8 +12,8 @@ auth.get("/", async (req, res) => {
 });
 auth.post("/login", async (req, res) => {
   const { username, password } = req.body;
-
-  if (!(await userInfraLogin({ username, password } as User))) {
+  const user = await userInfraLogin({ username, password } as User);
+  if (!user || user._id == "") {
     res.status(401).send("wrong password or username");
     return;
   }
@@ -21,8 +21,7 @@ auth.post("/login", async (req, res) => {
   const accessToken = generateAccessToken({ username } as User);
   res
     .cookie("accessToken", accessToken)
-    .cookie("test", "test")
-    .json({ accessToken });
+    .json({ accessToken, userId: user._id, admin: user.isAdmin });
 });
 
 auth.post("/user", async (req, res) => {

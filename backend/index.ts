@@ -8,5 +8,5 @@ connect();
 server.use("/mp4", express.static("./videos"));
 server.listen(PORT || 3000, () => {
   console.log({ MODE, PORT });
-  console.log("Sql node is on " + PORT || 3000);
+  console.log("Server runs on " + PORT || 3000);
 });

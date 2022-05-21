@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
 import { User } from "../../domain/user";
 import { Video } from "../../domain/video";
+import { useLocalStorage } from "../../hooks/useLocalstorage";
 import { getInfraVideos } from "../../infra/video";
 
 export function useVideos() {
   const [videos, setVideos] = useState<Video[]>([]);
   const [currentVideo, setCurrentVideo] = useState<string>("");
   const [display, setDisplay] = useState<boolean>(false);
+  const { idUser } = useLocalStorage();
 
   useEffect(() => {
-    console.log("getting videos");
-    getVideos();
-  }, []);
+    idUser && getVideos();
+  }, [idUser]);
 
   const close = () => {
     setDisplay(false);
@@ -19,11 +20,22 @@ export function useVideos() {
   const open = () => {
     setDisplay(true);
   };
+
   const getVideos = async () => {
-    setVideos(
-      await getInfraVideos({ id: 1, _id: "62889c358b163d47f4c9db88" } as User)
-    );
+    setVideos(await getInfraVideos({ id: 1, _id: idUser } as User));
   };
 
-  return { videos, currentVideo, setCurrentVideo, close, open, display };
+  const addVideo = (video: Video) => {
+    setVideos([...videos, video]);
+  };
+
+  return {
+    videos,
+    currentVideo,
+    setCurrentVideo,
+    close,
+    open,
+    display,
+    addVideo,
+  };
 }

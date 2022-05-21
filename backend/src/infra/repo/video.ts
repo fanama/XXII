@@ -28,9 +28,10 @@ export async function uploadRepoVideo(
 }
 
 export async function getRepoVideos(user?: User): Promise<Video[]> {
-  const videos = await VideoBuilder.find({ uploader: user });
-  console.log(videos);
-  return videos;
+  if (user?.isAdmin) {
+    return await VideoBuilder.find();
+  }
+  return await VideoBuilder.find({ uploader: user });
 }
 export async function getRepoVideo(id?: string): Promise<Video> {
   return {} as Video;

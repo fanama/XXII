@@ -32,7 +32,6 @@ videoRouter.post("/upload", async (req, res) => {
   const { id } = req.query;
 
   const user = await getInfraUser(`${id}`);
-  console.log({ user });
   if (!req.files || Object.keys(req.files).length === 0) {
     res.status(500).send(false);
     return;

@@ -2,11 +2,11 @@ import { User } from "../domain/user";
 import { usersMock } from "./mock/user";
 import { userRepoCreate, userRepoGetter, userRepoLogin } from "./repo/user";
 
-export async function userInfraLogin(user: User): Promise<boolean> {
+export async function userInfraLogin(user: User): Promise<User> {
   if (process.env.MODE == "mock") {
-    return usersMock.some(
+    return usersMock.filter(
       (u) => u.username == user.username && u.password == user.password
-    );
+    )[0];
   }
 
   return userRepoLogin(user);

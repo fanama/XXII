@@ -11,6 +11,7 @@ export async function getInfraVideos(user?: User): Promise<Video[]> {
         video.uploader.id == user?.id || video.uploader._id == user?._id
     );
   }
+  console.log({ user });
   return await getRepoVideos(user);
 }
 export async function getInfraVideo(id: number): Promise<Video> {

@@ -4,13 +4,11 @@ import { UserBuilder } from "./model/user";
 export async function userRepoCreate(user: User): Promise<boolean> {
   await UserBuilder.create(user);
   const users = await UserBuilder.find(user);
-  console.log({ users });
   return users.length > 0;
 }
-export async function userRepoLogin(user: User): Promise<boolean> {
+export async function userRepoLogin(user: User): Promise<User> {
   const users = await UserBuilder.find(user);
-  console.log({ users });
-  return users.length > 0;
+  return users[0];
 }
 
 export async function userRepoGetter(id: string): Promise<User> {
