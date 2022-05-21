@@ -3,11 +3,11 @@
     "target": "ESNext",
     "module": "commonjs",
     "outDir": "./dist",
-    "rootDir": "./src",
+    "rootDir": ".",
     "esModuleInterop": true,
     "strict": true,
     "types": []
   },
-  "include": ["src", "**.ts"],
+  "include": ["src/**/*", "**.ts"],
   "exclude": ["./dist"]
 }

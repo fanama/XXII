@@ -26,3 +26,23 @@ yarn dev
 or
 pnpm dev
 ```
+
+## Launch build
+
+```sh
+npm run build
+or
+yarn build
+or
+pnpm build
+```
+
+## Launch prod
+
+```sh
+npm start
+or
+yarn start
+or
+pnpm start
+```
