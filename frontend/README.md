@@ -7,6 +7,24 @@ create an `.next.config.js` file and fill the data accordin'to your config
 ```sh
 cp  next.config.dist.js next.config.js
 ```
+
+next.config.js
+```js
+const nextConfig = {
+  reactStrictMode: true,
+  async rewrites() {
+    return [
+      {
+        source: "/server/:path*",
+        destination: "http://localhost:3001/:path*",
+      },
+    ];
+  },
+};
+
+module.exports = nextConfig;
+```
+
 ## dev
 
 , run the development server:

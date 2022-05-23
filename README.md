@@ -3,6 +3,13 @@
 ## requirement
 
 - nodejs
+- pnpm
+
+```sh
+npm i -g pnpm
+```
+
+- mongodb
 
 ## Installation
 

@@ -1,5 +1,10 @@
 # Backend
 
+## go to the folder
+
+```sh
+cd backend
+```
 ## Install
 
 ```sh
@@ -16,6 +21,16 @@ create an `.env` file and fill the data accordin'to your config
 cp env .env
 
 ```
+
+.env
+
+```sh
+MODE=dev
+ACCESS_TOKEN_SECRET=secret
+PORT=3001
+MONGO_URI=mongodb://localhost/videos
+```
+
 
 ## Launch dev
 
