@@ -13,7 +13,7 @@ npm i -g pnpm
 
 user schema
 
-```json
+```js
 {
     _id: ObjectId("62889bd3ffb0dbe322f9896a"),
     username: 'JohnDoe',
@@ -24,7 +24,7 @@ user schema
 ```
 video schema 
 
-```json
+```js
 {
     _id: ObjectId("628909492e2eb53a0086e287"),
     name: 'Le.mp4',
