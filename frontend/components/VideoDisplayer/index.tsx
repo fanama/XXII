@@ -5,7 +5,16 @@ interface Props {
 }
 
 export function VideoDisplayer({ name }: Props) {
-  const { videoRef, handlePlay, handlePause, changeTime } = useDispaly(name);
+  const {
+    currentTime,
+    duration,
+    videoRef,
+    handlePlay,
+    handlePause,
+    changeTime,
+    moveForward,
+    moveBackward,
+  } = useDispaly(name);
 
   return (
     <div>
@@ -20,12 +29,15 @@ export function VideoDisplayer({ name }: Props) {
         <input
           type="range"
           min={0}
-          max={videoRef.current.duration}
+          value={currentTime}
+          max={duration}
           onChange={changeTime}
         />
         <div className="flex flex-row justify-between">
-          <button onClick={handlePlay}>play</button>
-          <button onClick={handlePause}>pause</button>
+          <button onClick={moveBackward}>{"<<"}</button>
+          <button onClick={handlePlay}>{"|>"}</button>
+          <button onClick={handlePause}>{"||"}</button>
+          <button onClick={moveForward}>{">>"}</button>
         </div>
       </div>
     </div>

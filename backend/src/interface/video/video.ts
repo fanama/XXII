@@ -1,6 +1,5 @@
 import express from "express";
 import { UploadedFile } from "express-fileupload";
-import { User } from "../../domain/user";
 import { getInfraUser } from "../../infra/user";
 import {
   getInfraVideo,

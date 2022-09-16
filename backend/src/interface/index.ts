@@ -13,7 +13,7 @@ server.use(express.json());
 server.use(coockieParser());
 server.use(fileUpload());
 server.use("/auth", auth);
-server.use("/mp4", express.static("../../videos"));
+server.use("/mp4", authenticateToken, express.static("../../videos"));
 server.use("/videos", authenticateToken, videoRouter);
 
 server.get("/", (req, res) => {
